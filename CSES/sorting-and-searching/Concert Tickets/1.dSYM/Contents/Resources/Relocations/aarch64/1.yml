@@ -1,0 +1,15 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/lekhitborole/CP/CSES/sorting-and-searching/Concert Tickets/1'
+relocations:
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: __Z5solvev, symObjAddr: 0x0, symBinAddr: 0x1000032D4, symSize: 0x474 }
+  - { offsetInCU: 0x8436, offset: 0x8436, size: 0x8, addend: 0x0, symName: __ZNSt3__127__tree_balance_after_insertB8ue170006IPNS_16__tree_node_baseIPvEEEEvT_S5_, symObjAddr: 0x5F4, symBinAddr: 0x1000038C8, symSize: 0x1A0 }
+  - { offsetInCU: 0x8758, offset: 0x8758, size: 0x8, addend: 0x0, symName: __ZNSt3__113__tree_removeB8ue170006IPNS_16__tree_node_baseIPvEEEEvT_S5_, symObjAddr: 0x794, symBinAddr: 0x100003A68, symSize: 0x3A0 }
+  - { offsetInCU: 0x8C3C, offset: 0x8C3C, size: 0x8, addend: 0x0, symName: __ZNSt3__120__throw_length_errorB8ue170006EPKc, symObjAddr: 0x540, symBinAddr: 0x100003814, symSize: 0x50 }
+  - { offsetInCU: 0xBA38, offset: 0xBA38, size: 0x8, addend: 0x0, symName: __Z5solvev, symObjAddr: 0x0, symBinAddr: 0x1000032D4, symSize: 0x474 }
+  - { offsetInCU: 0xD764, offset: 0xD764, size: 0x8, addend: 0x0, symName: __ZNSt3__16__treeIiNS_4lessIiEENS_9allocatorIiEEE7destroyEPNS_11__tree_nodeIiPvEE, symObjAddr: 0x5B4, symBinAddr: 0x100003888, symSize: 0x40 }
+  - { offsetInCU: 0xD89D, offset: 0xD89D, size: 0x8, addend: 0x0, symName: __ZNKSt3__16vectorIiNS_9allocatorIiEEE20__throw_length_errorB8ue170006Ev, symObjAddr: 0x52C, symBinAddr: 0x100003800, symSize: 0x14 }
+  - { offsetInCU: 0xD8C7, offset: 0xD8C7, size: 0x8, addend: 0x0, symName: __ZNSt3__120__throw_length_errorB8ue170006EPKc, symObjAddr: 0x540, symBinAddr: 0x100003814, symSize: 0x50 }
+  - { offsetInCU: 0xD907, offset: 0xD907, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x474, symBinAddr: 0x100003748, symSize: 0xB8 }
+  - { offsetInCU: 0xD9DB, offset: 0xD9DB, size: 0x8, addend: 0x0, symName: __ZNSt12length_errorC1B8ue170006EPKc, symObjAddr: 0x590, symBinAddr: 0x100003864, symSize: 0x24 }
+...

@@ -1,0 +1,17 @@
+[
+    {
+        "key": "ctrl+option+0",
+        "command": "FT.createFolderStructure",
+        "args": {
+            "templateName": "cp-problem"
+        }
+    },
+    {
+        "key": "ctrl+0",
+        "command": "FT.createFolderStructure",
+        "args": {
+            "templateName": "cp-problem",
+            "folder": "CSES/sorting-and-searching"
+        }
+    }
+]
