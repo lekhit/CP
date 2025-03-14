@@ -1,4 +1,9 @@
 {
+       "files.autoSave": "afterDelay", // Auto-save for faster compilation
+        "files.autoSaveDelay": 1000, // Auto-save delay in milliseconds
+        "editor.formatOnSave": false, // Usually, you don't want to auto-format in competitive programming,
+        "editor.suggestSelection": "first",
+       
     "files.associations": {
         "iostream": "cpp",
         "set": "cpp",
@@ -13,7 +18,63 @@
         "variant": "cpp",
         "type_traits": "cpp",
         "forward_list": "cpp",
-        "scoped_allocator": "cpp"
+        "scoped_allocator": "cpp",
+        "__bit_reference": "cpp",
+        "__config": "cpp",
+        "__split_buffer": "cpp",
+        "bitset": "cpp",
+        "cmath": "cpp",
+        "cstddef": "cpp",
+        "cstdint": "cpp",
+        "cstdio": "cpp",
+        "cstdlib": "cpp",
+        "cstring": "cpp",
+        "ctime": "cpp",
+        "cwchar": "cpp",
+        "deque": "cpp",
+        "initializer_list": "cpp",
+        "ios": "cpp",
+        "iosfwd": "cpp",
+        "istream": "cpp",
+        "list": "cpp",
+        "map": "cpp",
+        "new": "cpp",
+        "ostream": "cpp",
+        "queue": "cpp",
+        "sstream": "cpp",
+        "stack": "cpp",
+        "stdexcept": "cpp",
+        "streambuf": "cpp",
+        "string": "cpp",
+        "string_view": "cpp",
+        "vector": "cpp",
+        "__locale": "cpp",
+        "__node_handle": "cpp",
+        "__threading_support": "cpp",
+        "__verbose_abort": "cpp",
+        "cctype": "cpp",
+        "cfenv": "cpp",
+        "charconv": "cpp",
+        "cinttypes": "cpp",
+        "clocale": "cpp",
+        "complex": "cpp",
+        "condition_variable": "cpp",
+        "csetjmp": "cpp",
+        "csignal": "cpp",
+        "cstdarg": "cpp",
+        "cwctype": "cpp",
+        "execution": "cpp",
+        "fstream": "cpp",
+        "future": "cpp",
+        "iomanip": "cpp",
+        "locale": "cpp",
+        "mutex": "cpp",
+        "optional": "cpp",
+        "regex": "cpp",
+        "unordered_map": "cpp",
+        "unordered_set": "cpp",
+        "valarray": "cpp",
+        "algorithm": "cpp"
     },
     "folderTemplates.fileTemplates": {
         "CP Solution": [
@@ -117,6 +178,8 @@
             ]
         }
     ],
+    "java.debug.settings.onBuildFailureProceed": true,
+    "java.format.settings.url": ".vscode/java-formatter.xml",
     
     
 }

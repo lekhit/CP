@@ -2,9 +2,24 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "Java: Build and Run",
+            "type": "shell",
+            "command": "cd ${fileDirname} &&  javac -cp ${fileDirname} ${fileBasenameNoExtension} ",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        
+        {
             "type": "cppbuild",
             "label": "C/C++: clang++ build active file",
-            "command": "/usr/bin/clang++",
+            "command": "g++",
             "args": [
                 "-std=c++17",
                 "-stdlib=libc++",

@@ -11,13 +11,12 @@ const bool LOCAL_ENV = false;
     cin.tie(nullptr); cout.tie(nullptr)
 
 // Type definitions
-
-#define int int64_t
-
 typedef long long ll;
+typedef unsigned long long ull;
 typedef long double ld;
 typedef pair<int,int> pii;
 typedef vector<int> vi;
+typedef vector<ll> vll;
 typedef vector<pii> vpii;
 typedef vector<vi> vvi;
 
@@ -27,11 +26,10 @@ typedef vector<vi> vvi;
 #define F first
 #define S second
 #define all(x) (x).begin(), (x).end()
-#define inputvec(v,n) for(int i=0;i<n;i++) {cin>>v[i]; v[i]*=(-1);}
+#define inputvec(v,n) for(int i=0;i<n;i++) cin>>v[i]
 #define makevec(v,n) vi v(n); inputvec(v,n)
 #define take(type, name) type name; cin>>name
 #define take(type, name, size) type name(size); cin>>name
-
 // Generic input function for pairs
 template<typename T1, typename T2>
 istream& operator>>(istream& in, pair<T1, T2>& p) {
@@ -49,25 +47,52 @@ istream& operator>>(istream& in, vector<T>& arr) {
 // Variadic macro for taking multiple inputs of same type
 #define TS(type, ...) type __VA_ARGS__; ([&](auto&&... args) { ((cin >> args), ...); }(__VA_ARGS__))
 
-void solve() {
-    int n,count;cin>>n;
-    vi arr(n);for(auto &i:arr)cin>>i;
-    count=0;
-    
-    int maxSum=arr[0],runningMax=arr[0];
-   for(int i=0;i<n;i++){
-    if(arr[i]<0){count++;}
-if(i>0){
-    if(runningMax < 0) runningMax=0;
-    runningMax+=arr[i];
-maxSum=max(runningMax, maxSum);
-}
-   }
-   maxSum= count==n ? *max_element(all(arr)):maxSum;
-   cout<<maxSum;
+int getPosition(int value, vi &posIndex){
+
 }
 
-int32_t main() {
+void solve() {
+    TS(int, n,m);
+    take(vi, arr, n);
+    vi posIndex(n+1);
+    int pre=arr[0],count=1;
+    
+
+    for(int i=0;i<n;i++ ){
+        posIndex[arr[i]]=i;
+    }
+    for(int i=2;i<=n;i++){
+        if(posIndex[i-1] > posIndex[i]){
+            count++;
+        }
+    }
+while(m--){
+TS(int, a, b);
+int actualElementA = arr[a-1],actualElementB = arr[b-1];
+auto getPosition = [&](int value){
+        if(value == actualElementA) return a;
+        if(value == actualElementB) return b;
+        return posIndex[value];
+};
+auto checkDiff = [&](int val){
+    if((posIndex[val] < posIndex[val+1]) && (getPosition(val) > getPosition(val+1))) return 1;
+    if((posIndex[val] > posIndex[val+1]) && (getPosition(val) < getPosition(val+1))) return -1;
+    return 0;
+};
+
+auto swapElements = [&](){
+    int temp=arr[a-1];
+    arr[a-1]=arr[b-1];
+    arr[b-1]=temp;
+};
+    count+=checkDiff(actualElementA)+checkDiff(actualElementB);
+    cout<<count<<endl;
+    posIndex[actualElementA]=getPosition(actualElementA);
+    posIndex[actualElementB]=getPosition(actualElementB);
+    swapElements();
+}
+}
+int main() {
     fastio;
     
     if(LOCAL_ENV) {

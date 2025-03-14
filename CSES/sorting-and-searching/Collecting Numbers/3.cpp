@@ -11,13 +11,12 @@ const bool LOCAL_ENV = false;
     cin.tie(nullptr); cout.tie(nullptr)
 
 // Type definitions
-
-#define int int64_t
-
 typedef long long ll;
+typedef unsigned long long ull;
 typedef long double ld;
 typedef pair<int,int> pii;
 typedef vector<int> vi;
+typedef vector<ll> vll;
 typedef vector<pii> vpii;
 typedef vector<vi> vvi;
 
@@ -50,24 +49,23 @@ istream& operator>>(istream& in, vector<T>& arr) {
 #define TS(type, ...) type __VA_ARGS__; ([&](auto&&... args) { ((cin >> args), ...); }(__VA_ARGS__))
 
 void solve() {
-    int n,count;cin>>n;
-    vi arr(n);for(auto &i:arr)cin>>i;
-    count=0;
-    
-    int maxSum=arr[0],runningMax=arr[0];
-   for(int i=0;i<n;i++){
-    if(arr[i]<0){count++;}
-if(i>0){
-    if(runningMax < 0) runningMax=0;
-    runningMax+=arr[i];
-maxSum=max(runningMax, maxSum);
-}
-   }
-   maxSum= count==n ? *max_element(all(arr)):maxSum;
-   cout<<maxSum;
+    TS(int, n);
+    take(vi, arr, n);
+    vi posIndex(n);
+    int pre=arr[0],count=1;
+
+    for(int i=0;i<n;i++ ){
+        posIndex[arr[i]]=i;
+    }
+    for(int i=2;i<=n;i++){
+        if(posIndex[i-1] > posIndex[i]){
+            count++;
+        }
+    }
+    cout<<count;
 }
 
-int32_t main() {
+int main() {
     fastio;
     
     if(LOCAL_ENV) {

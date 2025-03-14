@@ -7,17 +7,17 @@ const bool LOCAL_ENV = true;
 const bool LOCAL_ENV = false;
 #endif
 
+#define int int64_t
 #define fastio ios_base::sync_with_stdio(false); \
     cin.tie(nullptr); cout.tie(nullptr)
 
 // Type definitions
-
-#define int int64_t
-
 typedef long long ll;
+typedef unsigned long long ull;
 typedef long double ld;
 typedef pair<int,int> pii;
 typedef vector<int> vi;
+typedef vector<ll> vll;
 typedef vector<pii> vpii;
 typedef vector<vi> vvi;
 
@@ -27,11 +27,10 @@ typedef vector<vi> vvi;
 #define F first
 #define S second
 #define all(x) (x).begin(), (x).end()
-#define inputvec(v,n) for(int i=0;i<n;i++) {cin>>v[i]; v[i]*=(-1);}
+#define inputvec(v,n) for(int i=0;i<n;i++) cin>>v[i]
 #define makevec(v,n) vi v(n); inputvec(v,n)
 #define take(type, name) type name; cin>>name
 #define take(type, name, size) type name(size); cin>>name
-
 // Generic input function for pairs
 template<typename T1, typename T2>
 istream& operator>>(istream& in, pair<T1, T2>& p) {
@@ -50,21 +49,17 @@ istream& operator>>(istream& in, vector<T>& arr) {
 #define TS(type, ...) type __VA_ARGS__; ([&](auto&&... args) { ((cin >> args), ...); }(__VA_ARGS__))
 
 void solve() {
-    int n,count;cin>>n;
-    vi arr(n);for(auto &i:arr)cin>>i;
-    count=0;
-    
-    int maxSum=arr[0],runningMax=arr[0];
-   for(int i=0;i<n;i++){
-    if(arr[i]<0){count++;}
-if(i>0){
-    if(runningMax < 0) runningMax=0;
-    runningMax+=arr[i];
-maxSum=max(runningMax, maxSum);
-}
-   }
-   maxSum= count==n ? *max_element(all(arr)):maxSum;
-   cout<<maxSum;
+  TS(int, n);
+  take(vi, coins, n);
+  sort(all(coins));
+  int runningSum=1;
+  for(auto coin:coins){
+    if(coin>runningSum){
+        cout<<runningSum;return;
+    }
+    runningSum+=coin;
+  }
+  cout<<runningSum;
 }
 
 int32_t main() {

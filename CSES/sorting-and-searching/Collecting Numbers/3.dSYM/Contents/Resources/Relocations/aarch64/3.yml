@@ -1,0 +1,12 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/lekhitborole/CP/CSES/sorting-and-searching/Collecting Numbers/3'
+relocations:
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: __Z5solvev, symObjAddr: 0x0, symBinAddr: 0x100003A48, symSize: 0x2D8 }
+  - { offsetInCU: 0x5F5B, offset: 0x5F5B, size: 0x8, addend: 0x0, symName: __ZNSt3__120__throw_length_errorB8ue170006EPKc, symObjAddr: 0x3A4, symBinAddr: 0x100003DEC, symSize: 0x50 }
+  - { offsetInCU: 0x8910, offset: 0x8910, size: 0x8, addend: 0x0, symName: __Z5solvev, symObjAddr: 0x0, symBinAddr: 0x100003A48, symSize: 0x2D8 }
+  - { offsetInCU: 0x994A, offset: 0x994A, size: 0x8, addend: 0x0, symName: __ZNKSt3__16vectorIiNS_9allocatorIiEEE20__throw_length_errorB8ue170006Ev, symObjAddr: 0x390, symBinAddr: 0x100003DD8, symSize: 0x14 }
+  - { offsetInCU: 0x9974, offset: 0x9974, size: 0x8, addend: 0x0, symName: __ZNSt3__120__throw_length_errorB8ue170006EPKc, symObjAddr: 0x3A4, symBinAddr: 0x100003DEC, symSize: 0x50 }
+  - { offsetInCU: 0x99B4, offset: 0x99B4, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x2D8, symBinAddr: 0x100003D20, symSize: 0xB8 }
+  - { offsetInCU: 0x9A8B, offset: 0x9A8B, size: 0x8, addend: 0x0, symName: __ZNSt12length_errorC1B8ue170006EPKc, symObjAddr: 0x3F4, symBinAddr: 0x100003E3C, symSize: 0x24 }
+...
