@@ -3,59 +3,32 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Main",
+            "name": "Debug Current Java File",
             "request": "launch",
-            "mainClass": "Main",
-            "projectName": "CP_fa4a75a2"
-        },
-        {
-            "type": "java",
-            "name": "Main",
-            "request": "launch",
-            "mainClass": "ProblemTest.Main",
-            "projectName": "CP_fa4a75a2"
-        },
-        {
-            "type": "java",
-            "name": "Main",
-            "request": "launch",
-            "mainClass": "${fileDirname}.Main",
-            "projectName": "CP_fa4a75a2"
-        },
-        {
-            "name": "(lldb) Launch",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "enter program name, for example ${workspaceFolder}/a.out",
-            "args": [],
-            "stopAtEntry": false,
+            "mainClass": "${file}",
+            "classPaths": ["${fileDirname}/bin"],
+            "preLaunchTask": "Compile Java",
+            "args": [
+                "${fileDirname}/input.txt",
+                "${fileDirname}/output.txt"
+            ],
+            "vmArgs": "-DLOCAL",
             "cwd": "${fileDirname}",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "lldb"
+            "console": "internalConsole",
+            "stopOnEntry": false
         },
         {
-            "name": "clang++ - Build and debug active file",
+            "name": "Debug Current C++ File",
             "type": "cppdbg",
             "request": "launch",
             "program": "${fileDirname}/${fileBasenameNoExtension}",
-            "args": [],
+            "args": ["<", "${fileDirname}/input.txt", ">", "${fileDirname}/output.txt"],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": false,
             "MIMode": "lldb",
             "preLaunchTask": "C/C++: clang++ build active file"
-        },
-        {
-            "type": "java",
-            "name": "Java Debug",
-            "request": "launch",
-            "mainClass": "${fileBasenameNoExtension}",
-            "projectName": "CP",
-            "args": "",
-            "cwd": "${fileDirname}",
-            "console": "internalConsole"
         }
     ]
 }

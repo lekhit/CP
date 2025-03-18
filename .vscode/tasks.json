@@ -2,11 +2,36 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Java: Build and Run",
+            "label": "Compile Java",
             "type": "shell",
-            "command": "cd ${fileDirname} &&  javac -cp ${fileDirname} ${fileBasenameNoExtension} ",
+            "command": "javac",
+            "args": [
+                "-d",
+                "${fileDirname}/bin",
+                "${file}"
+            ],
             "group": {
                 "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+            ]
+        },
+        {
+            "label": "Run CP Java",
+            "type": "shell",
+            "command": "java",
+            "args": [
+                "-DLOCAL",
+                "-cp",
+                "${fileDirname}/bin",
+                "${fileBasenameNoExtension}",
+                "${fileDirname}/input.txt",
+                "${fileDirname}/output.txt"    
+            ],
+            "dependsOn": "Compile Java",
+            "group": {
+                "kind": "test",
                 "isDefault": true
             },
             "presentation": {
@@ -15,7 +40,6 @@
             },
             "problemMatcher": []
         },
-        
         {
             "type": "cppbuild",
             "label": "C/C++: clang++ build active file",
@@ -33,7 +57,9 @@
             "options": {
                 "cwd": "${fileDirname}"
             },
-            "problemMatcher": ["$gcc"],
+            "problemMatcher": [
+                "$gcc"
+            ],
             "group": {
                 "kind": "build",
                 "isDefault": true

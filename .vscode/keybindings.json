@@ -13,5 +13,10 @@
             "templateName": "cp-problem",
             "folder": "CSES/sorting-and-searching"
         }
+    },
+    {
+        "key": "ctrl+shift+0", // Or any other shortcut you prefer
+        "command": "workbench.action.tasks.runTask",
+        "args": "Run Java1"
     }
 ]
