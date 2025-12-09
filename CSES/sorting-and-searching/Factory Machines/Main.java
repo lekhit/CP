@@ -6,16 +6,24 @@ public class Main {
         // Your solution here
         int n=in.nextInt(),t=in.nextInt();
         int[] arr=readArray(n);
-        long time=(long)Math.pow(10,18);
-        int products=0;
-        while(products > t){
+        long end=(long)Math.pow(10,18),time=0,start=0;
+        long products=(long)Math.pow(10,9);
+        while(start<end){
             products=0;
-            time=time>>1;
+            time=((end-start)>>2)+start;
             for(int i:arr){
                 products+=time/i;
+                if(products>t) break;
+            }
+            // if(products==t) break;
+            if(products >= t){
+                end=time;
+            }
+            else{
+                start=time+1;
             }
         }
-        out.print(time);
+        out.print(start);
     }
     public static void main(String[] args) throws IOException {
         if (isLocalEnvironment() && args.length == 2) {

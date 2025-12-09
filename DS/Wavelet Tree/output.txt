@@ -1,0 +1,90 @@
+name:arr
+0 1 5 7 6 2 1 3 4 8 7 2 
+name:leftArr
+1 2 1 3 4 2 
+name:rightArr
+5 7 6 8 7 
+name:arr
+0 1 2 1 3 4 2 
+name:leftArr
+1 2 1 2 
+name:rightArr
+3 4 
+name:arr
+0 1 2 1 2 
+name:leftArr
+1 1 
+name:rightArr
+2 2 
+name:arr
+0 1 1 
+name:leftArr
+
+name:rightArr
+
+name:arr
+0 2 2 
+name:leftArr
+
+name:rightArr
+
+name:arr
+0 3 4 
+name:leftArr
+3 
+name:rightArr
+4 
+name:arr
+0 3 
+name:leftArr
+
+name:rightArr
+
+name:arr
+0 4 
+name:leftArr
+
+name:rightArr
+
+name:arr
+0 5 7 6 8 7 
+name:leftArr
+5 6 
+name:rightArr
+7 8 7 
+name:arr
+0 5 6 
+name:leftArr
+5 
+name:rightArr
+6 
+name:arr
+0 5 
+name:leftArr
+
+name:rightArr
+
+name:arr
+0 6 
+name:leftArr
+
+name:rightArr
+
+name:arr
+0 7 8 7 
+name:leftArr
+7 7 
+name:rightArr
+8 
+name:arr
+0 7 7 
+name:leftArr
+
+name:rightArr
+
+name:arr
+0 8 
+name:leftArr
+
+name:rightArr
+

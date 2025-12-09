@@ -27,14 +27,16 @@ public class Main {
         lamps.add(n);
         MultiSet<Integer> maxlengths=new MultiSet<>();
         maxlengths.add(n-0);
+        StringBuilder results = new StringBuilder();
         for(int i:arr){
             int low=lamps.lower(i),high=lamps.higher(i);
             maxlengths.remove(high-low);
             lamps.add(i);
             maxlengths.add(i-low);
             maxlengths.add(high-i);
-            out.print(maxlengths.lastKey()+" ");
+            results.append(maxlengths.lastKey()).append(" ");
         }   
+        out.println(results.toString().trim());
         /*
          * 
          * 1 2 3 4 5 6 7 8

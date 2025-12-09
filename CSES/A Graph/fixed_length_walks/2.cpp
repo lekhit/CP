@@ -1,0 +1,1 @@
+// minize chars

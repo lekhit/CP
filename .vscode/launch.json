@@ -1,34 +1,79 @@
 {
-    "version": "0.2.0",
-    "configurations": [
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Main",
+      "request": "launch",
+      "mainClass": "Main2.Main",
+      "projectName": "CP_fa4a75a2"
+    },
+    {
+      "type": "java",
+      "name": "Playground",
+      "request": "launch",
+      "mainClass": "Threads.Playground",
+      "projectName": "CP_fa4a75a2"
+    },
+    {
+      "type": "java",
+      "name": "Main",
+      "request": "launch",
+      "mainClass": "Main",
+      "projectName": "CP_fa4a75a2"
+    },
+    {
+      "type": "java",
+      "name": "Debug Current Java File",
+      "request": "launch",
+      "mainClass": "${file}",
+      "classPaths": [
+        "${fileDirname}/bin"
+      ],
+      "preLaunchTask": "Compile Java",
+      "args": [
+        "${fileDirname}/input.txt",
+        "${fileDirname}/output.txt"
+      ],
+      "vmArgs": "-DLOCAL",
+      "cwd": "${fileDirname}",
+      "console": "internalConsole",
+      "stopOnEntry": false
+    },
+    {
+      "name": "Debug Current C++ File",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${fileDirname}/${fileBasenameNoExtension}",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${fileDirname}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "miDebuggerPath": "/usr/bin/gdb",
+      "showDisplayString": true,
+      "preLaunchTask": "C/C++: clang++ build active file",
+      "setupCommands": [
         {
-            "type": "java",
-            "name": "Debug Current Java File",
-            "request": "launch",
-            "mainClass": "${file}",
-            "classPaths": ["${fileDirname}/bin"],
-            "preLaunchTask": "Compile Java",
-            "args": [
-                "${fileDirname}/input.txt",
-                "${fileDirname}/output.txt"
-            ],
-            "vmArgs": "-DLOCAL",
-            "cwd": "${fileDirname}",
-            "console": "internalConsole",
-            "stopOnEntry": false
-        },
-        {
-            "name": "Debug Current C++ File",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "${fileDirname}/${fileBasenameNoExtension}",
-            "args": ["<", "${fileDirname}/input.txt", ">", "${fileDirname}/output.txt"],
-            "stopAtEntry": false,
-            "cwd": "${fileDirname}",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "lldb",
-            "preLaunchTask": "C/C++: clang++ build active file"
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
         }
-    ]
+      ]
+    },
+    {
+      "name": "C/C++: g++ build and debug active file",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${fileDirname}/${fileBasenameNoExtension}",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${fileDirname}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb",
+      "preLaunchTask": "C/C++: g++ build active file"
+    }
+  ]
 }

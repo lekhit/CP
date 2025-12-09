@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codeforces Quest - Your Sorting & Searching Adventure</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Header with Stats -->
+        <header class="game-header">
+            <div class="player-info">
+                <input type="text" id="username" placeholder="Enter CF Handle" class="username-input">
+                <div class="level-badge">Lvl <span id="player-level">1</span></div>
+            </div>
+            <div class="stats-bar">
+                <div class="xp-container">
+                    <div class="xp-bar">
+                        <div class="xp-fill" id="xp-fill"></div>
+                        <span class="xp-text"><span id="current-xp">0</span> / <span id="next-level-xp">30</span> XP</span>
+                    </div>
+                </div>
+                <div class="streak-counter">
+                    🔥 <span id="streak">0</span> Day Streak
+                </div>
+                <button class="sound-toggle" onclick="toggleSound()">🔊</button>
+            </div>
+        </header>
+
+        <!-- Achievement Popup -->
+        <div id="achievement-popup" class="achievement-popup hidden">
+            <div class="achievement-content">
+                <span class="achievement-icon">🏆</span>
+                <h3 id="achievement-title">Achievement Unlocked!</h3>
+                <p id="achievement-desc">Description</p>
+            </div>
+        </div>
+
+        <!-- Main Game Area -->
+        <main class="game-main">
+            <div class="zone-selector">
+                <button class="zone-tab active" onclick="selectZone(1)" id="zone-1">
+                    🌱 Zone 1: Sorting Gardens
+                    <span class="zone-progress" id="zone-1-progress">0/3</span>
+                </button>
+                <button class="zone-tab locked" onclick="selectZone(2)" id="zone-2">
+                    🏹 Zone 2: Two Pointer Temple
+                    <span class="zone-progress" id="zone-2-progress">🔒</span>
+                </button>
+                <button class="zone-tab locked" onclick="selectZone(3)" id="zone-3">
+                    🔍 Zone 3: Binary Search Fortress
+                    <span class="zone-progress" id="zone-3-progress">🔒</span>
+                </button>
+                <button class="zone-tab locked" onclick="selectZone(4)" id="zone-4">
+                    📊 Zone 4: Interval Islands
+                    <span class="zone-progress" id="zone-4-progress">🔒</span>
+                </button>
+                <button class="zone-tab locked" onclick="selectZone(5)" id="zone-5">
+                    🌟 Zone 5: Grand Synthesis
+                    <span class="zone-progress" id="zone-5-progress">🔒</span>
+                </button>
+            </div>
+
+            <div class="quest-area" id="quest-area">
+                <!-- Quests will be dynamically loaded here -->
+            </div>
+
+            <!-- Daily Challenge Wheel -->
+            <div class="daily-challenge">
+                <h3>🎲 Daily Challenge</h3>
+                <button class="spin-wheel" onclick="spinDailyChallenge()">Spin for Bonus!</button>
+                <div id="daily-result" class="daily-result hidden"></div>
+            </div>
+        </main>
+
+        <!-- Side Panel -->
+        <aside class="side-panel">
+            <div class="achievements-section">
+                <h3>🎖️ Achievements</h3>
+                <div class="badge-grid" id="badge-grid">
+                    <div class="badge locked" title="Complete Zone 1">🥉</div>
+                    <div class="badge locked" title="Complete Zone 2">🥈</div>
+                    <div class="badge locked" title="Complete Zone 3">🥇</div>
+                    <div class="badge locked" title="Complete Zone 4">💎</div>
+                    <div class="badge locked" title="Complete All Zones">👑</div>
+                    <div class="badge locked" title="First Try Hero">🔥</div>
+                    <div class="badge locked" title="Speed Demon">⚡</div>
+                    <div class="badge locked" title="Comeback Kid">🌈</div>
+                </div>
+            </div>
+            
+            <div class="leaderboard-section">
+                <h3>📊 Personal Stats</h3>
+                <div class="stat-item">Problems Solved: <span id="problems-solved">0</span>/25</div>
+                <div class="stat-item">Total XP: <span id="total-xp">0</span></div>
+                <div class="stat-item">Mushrooms: <span id="mushrooms">0</span>/6 🍄</div>
+                <div class="stat-item">Boss Defeats: <span id="bosses">0</span>/3</div>
+                <div class="stat-item">First Attempts: <span id="first-attempts">0</span></div>
+            </div>
+
+            <button class="reset-btn" onclick="confirmReset()">🔄 Reset Progress</button>
+        </aside>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

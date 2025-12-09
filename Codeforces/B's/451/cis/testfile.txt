@@ -1,0 +1,2 @@
+This is the first write, which should succeed.
+This is the second write. If this succeeds, mediation is incomplete.

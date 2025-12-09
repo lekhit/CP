@@ -1,0 +1,9 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/lekhitborole/CP/CSES/sorting-and-searching/Josephus Problem I/2'
+relocations:
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: __Z5solvev, symObjAddr: 0x0, symBinAddr: 0x100003D58, symSize: 0xA8 }
+  - { offsetInCU: 0x8C90, offset: 0x8C90, size: 0x8, addend: 0x0, symName: __Z5solvev, symObjAddr: 0x0, symBinAddr: 0x100003D58, symSize: 0xA8 }
+  - { offsetInCU: 0x9115, offset: 0x9115, size: 0x8, addend: 0x0, symName: __ZNSt3__14listIiNS_9allocatorIiEEED1Ev, symObjAddr: 0xA8, symBinAddr: 0x100003E00, symSize: 0x60 }
+  - { offsetInCU: 0x93E1, offset: 0x93E1, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x108, symBinAddr: 0x100003E60, symSize: 0xB8 }
+...

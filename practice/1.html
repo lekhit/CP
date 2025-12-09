@@ -1,0 +1,1114 @@
+<!-- I'll create an interactive website for your gamified Codeforces practice journey! This will be a single HTML file that you can save and open in your browser.
+
+```html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codeforces Quest - Algorithm Adventure</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #fff, 0 0 20px #fff; }
+            to { text-shadow: 0 0 20px #fff, 0 0 30px #fff; }
+        }
+
+        .game-title {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .stats-panel {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 10px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #667eea, #764ba2, #f093fb, #f5576c);
+            border-radius: 10px;
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.3s;
+        }
+
+        .stat-item:hover::before {
+            opacity: 1;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .xp-bar {
+            width: 100%;
+            height: 25px;
+            background: #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 10px;
+            position: relative;
+        }
+
+        .xp-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            transition: width 0.5s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .power-crystals {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .crystal {
+            font-size: 2em;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .world-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .world-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            color: white;
+        }
+
+        .world-title {
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+
+        .world-subtitle {
+            font-size: 0.9em;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        .world-progress {
+            text-align: right;
+        }
+
+        .stage {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .stage-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .problem-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .problem-item {
+            display: grid;
+            grid-template-columns: 40px 1fr 100px 80px 120px 80px;
+            align-items: center;
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .problem-item:hover {
+            transform: translateX(5px);
+            border-color: #667eea;
+            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.2);
+        }
+
+        .problem-checkbox {
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+        }
+
+        .problem-name {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .problem-difficulty {
+            display: flex;
+            gap: 2px;
+        }
+
+        .sword {
+            color: #f39c12;
+        }
+
+        .problem-xp {
+            font-weight: bold;
+            color: #27ae60;
+        }
+
+        .problem-link {
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .problem-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .problem-status {
+            text-align: center;
+            font-size: 1.5em;
+        }
+
+        .completed {
+            background: #e8f5e9;
+            border-color: #4CAF50;
+        }
+
+        .boss-problem {
+            background: linear-gradient(135deg, #fff5f5 0%, #ffebee 100%);
+            border: 2px solid #ff6b6b;
+        }
+
+        .boss-problem .problem-name::before {
+            content: "👑 ";
+        }
+
+        .achievements-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .achievement-card {
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .achievement-card.unlocked {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4b 100%);
+            animation: achievementUnlock 0.5s ease;
+        }
+
+        @keyframes achievementUnlock {
+            0% { transform: scale(0.8); opacity: 0; }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .achievement-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .achievement-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .achievement-description {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .achievement-reward {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #27ae60;
+        }
+
+        .controls-panel {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .control-btn {
+            padding: 12px 20px;
+            background: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .save-btn {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .reset-btn {
+            background: #f44336;
+            color: white;
+        }
+
+        .daily-quest {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .daily-quest-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .daily-quest-task {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .daily-quest-reward {
+            font-weight: bold;
+            color: #27ae60;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            display: none;
+            animation: slideIn 0.5s ease;
+            z-index: 1000;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(400px); }
+            to { transform: translateX(0); }
+        }
+
+        .notification.show {
+            display: block;
+        }
+
+        .notification.success {
+            border-left: 5px solid #4CAF50;
+        }
+
+        .notification.achievement {
+            border-left: 5px solid #ffd700;
+            background: linear-gradient(135deg, #fff 0%, #fffacd 100%);
+        }
+
+        .power-crystal-shop {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .shop-items {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .shop-item {
+            padding: 10px 20px;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .shop-item:hover:not(.disabled) {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .shop-item.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .streak-flame {
+            display: inline-block;
+            animation: flicker 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes flicker {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @media (max-width: 768px) {
+            .problem-item {
+                grid-template-columns: 40px 1fr;
+                gap: 10px;
+            }
+            
+            .problem-item > *:not(.problem-checkbox):not(.problem-name) {
+                display: none;
+            }
+            
+            .stats-panel {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1 class="game-title">🎮 CODEFORCES QUEST</h1>
+            <p class="subtitle">The Sorting & Searching Adventure</p>
+        </div>
+
+        <!-- Stats Panel -->
+        <div class="stats-panel">
+            <div class="stat-item">
+                <div class="stat-label">Player Name</div>
+                <div class="stat-value" id="playerName">Hero</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Level</div>
+                <div class="stat-value" id="playerLevel">1</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Title</div>
+                <div class="stat-value" id="playerTitle">Apprentice</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Total XP</div>
+                <div class="stat-value" id="totalXP">0</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Current Streak</div>
+                <div class="stat-value"><span class="streak-flame">🔥</span> <span id="currentStreak">0</span> days</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Power Crystals</div>
+                <div class="power-crystals">
+                    <span class="crystal" id="crystal1">💎</span>
+                    <span class="crystal" id="crystal2">💎</span>
+                    <span class="crystal" id="crystal3">💎</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- XP Progress Bar -->
+        <div class="stats-panel">
+            <div style="width: 100%;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                    <span>Level Progress</span>
+                    <span id="xpProgress">0/100 XP</span>
+                </div>
+                <div class="xp-bar">
+                    <div class="xp-fill" id="xpBar" style="width: 0%;">
+                        <span id="xpPercentage">0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Daily Quest -->
+        <div class="daily-quest">
+            <div class="daily-quest-title">📅 Daily Quest</div>
+            <div class="daily-quest-task" id="dailyQuestTask">Loading...</div>
+            <div class="daily-quest-reward">Reward: +10 XP</div>
+        </div>
+
+        <!-- Power Crystal Shop -->
+        <div class="power-crystal-shop">
+            <h3 style="text-align: center; margin-bottom: 15px;">💎 Power Crystal Abilities</h3>
+            <div class="shop-items">
+                <div class="shop-item" onclick="usePowerCrystal('skip')">
+                    🔄 Skip Stone (1 💎)
+                </div>
+                <div class="shop-item" onclick="usePowerCrystal('hint')">
+                    💡 Hint Scroll (1 💎)
+                </div>
+                <div class="shop-item" onclick="usePowerCrystal('boost')">
+                    ⚡ Energy Boost (2 💎)
+                </div>
+            </div>
+        </div>
+
+        <!-- World 1: The Sorting Plains -->
+        <div class="world-section">
+            <div class="world-header">
+                <div>
+                    <div class="world-title">🌍 WORLD 1: THE SORTING PLAINS</div>
+                    <div class="world-subtitle">"Where order meets chaos"</div>
+                </div>
+                <div class="world-progress">
+                    <div>Progress: <span id="world1Progress">0/8</span></div>
+                    <div>Completed: <span id="world1Percentage">0%</span></div>
+                </div>
+            </div>
+
+            <div class="stage">
+                <div class="stage-title">Stage 1-1: Tutorial Village</div>
+                <div class="problem-list">
+                    <div class="problem-item" data-problem-id="1">
+                        <input type="checkbox" class="problem-checkbox" onchange="toggleProblem(1, 10)">
+                        <span class="problem-name">Remove Smallest</span>
+                        <div class="problem-difficulty">
+                            <span class="sword">⚔️</span>
+                        </div>
+                        <span class="problem-xp">10 XP</span>
+                        <a href="https://codeforces.com/problemset/problem/1399/A" target="_blank" class="problem-link">Solve</a>
+                        <span class="problem-status" id="status1">⬜</span>
+                    </div>
+                    <div class="problem-item" data-problem-id="2">
+                        <input type="checkbox" class="problem-checkbox" onchange="toggleProblem(2, 10)">
+                        <span class="problem-name">Two Arrays And Swaps</span>
+                        <div class="problem-difficulty">
+                            <span class="sword">⚔️</span>
+                        </div>
+                        <span class="problem-xp">10 XP</span>
+                        <a href="https://codeforces.com/problemset/problem/1353/B" target="_blank" class="problem-link">Solve</a>
+                        <span class="problem-status" id="status2">⬜</span>
+                    </div>
+                    <div class="problem-item" data-problem-id="3">
+                        <input type="checkbox" class="problem-checkbox" onchange="toggleProblem(3, 10)">
+                        <span class="problem-name">Teams Forming</span>
+                        <div class="problem-difficulty">
+                            <span class="sword">⚔️</span>
+                        </div>
+                        <span class="problem-xp">10 XP</span>
+                        <a href="https://codeforces.com/problemset/problem/1092/B" target="_blank" class="problem-link">Solve</a>
+                        <span class="problem-status" id="status3">⬜</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stage">
+                <div class="stage-title">Stage 1-2: The Greedy Gardens</div>
+                <div class="problem-list">
+                    <div class="problem-item" data-problem-id="4">
+                        <input type="checkbox" class="problem-checkbox" onchange="toggleProblem(4, 10)">
+                        <span class="problem-name">Even Array</span>
+                        <div class="problem-difficulty">
+                            <span class="sword">⚔️</span>
+                        </div>
+                        <span class="problem-xp">10 XP</span>
+                        <a href="https://codeforces.com/problemset/problem/1367/B" target="_blank" class="problem-link">Solve</a>
+                        <span class="problem-status" id="status4">⬜</span>
+                    </div>
+                    <div class="problem-item" data-problem-id="5">
+                        <input type="checkbox" class="problem-checkbox" onchange="toggleProblem(5, 10)">
+                        <span class="problem-name">Unique Number</span>
+                        <div class="problem-difficulty">
+                            <span class="sword">⚔️</span>
+                        </div>
+                        <span class="problem-xp">10 XP</span>
+                        <a href="https://codeforces.com/problemset/problem/1462/C" target="_blank" class="problem-link">Solve</a>
+                        <span class="problem-status" id="status5">⬜</span>
+                    </div>
+                    <div class="problem-item boss-problem" data-problem-id="6">
+                        <input type="checkbox" class="problem-checkbox" onchange="toggleProblem(6, 20, true)">
+                        <span class="problem-name">MINI BOSS: Boats Competition</span>
+                        <div class="problem-difficulty">
+                            <span class="sword">⚔️⚔️</span>
+                        </div>
+                        <span class="problem-xp">20 XP</span>
+                        <a href="https://codeforces.com/problemset/problem/1399/C" target="_blank" class="problem-link">Battle!</a>
+                        <span class="problem-status" id="status6">⬜</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Achievements Section -->
+        <div class="achievements-section">
+            <h2 style="text-align: center; margin-bottom: 20px;">🏆 Achievements</h2>
+            <div class="achievements-grid">
+                <div class="achievement-card" id="achFirstBlood">
+                    <div class="achievement-icon">🎯</div>
+                    <div class="achievement-name">First Blood</div>
+                    <div class="achievement-description">Solve your first problem</div>
+                    <div class="achievement-reward">+10 XP</div>
+                </div>
+                <div class="achievement-card" id="achSpeedRunner">
+                    <div class="achievement-icon">⚡</div>
+                    <div class="achievement-name">Speed Runner</div>
+                    <div class="achievement-description">Solve 3 problems in one day</div>
+                    <div class="achievement-reward">+1 💎</div>
+                </div>
+                <div class="achievement-card" id="achConsistent">
+                    <div class="achievement-icon">🔥</div>
+                    <div class="achievement-name">Consistent</div>
+                    <div class="achievement-description">3-day streak</div>
+                    <div class="achievement-reward">+20 XP</div>
+                </div>
+                <div class="achievement-card" id="achBossSlayer">
+                    <div class="achievement-icon">👑</div>
+                    <div class="achievement-name">Boss Slayer</div>
+                    <div class="achievement-description">Defeat your first boss</div>
+                    <div class="achievement-reward">+30 XP</div>
+                </div>
+                <div class="achievement-card" id="achWorldClear">
+                    <div class="achievement-icon">🌍</div>
+                    <div class="achievement-name">World Conqueror</div>
+                    <div class="achievement-description">Complete World 1</div>
+                    <div class="achievement-reward">+50 XP</div>
+                </div>
+                <div class="achievement-card" id="achPerfectionist">
+                    <div class="achievement-icon">💯</div>
+                    <div class="achievement-name">Perfectionist</div>
+                    <div class="achievement-description">Solve 10 problems on first try</div>
+                    <div class="achievement-reward">+50 XP +1 💎</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Control Buttons -->
+        <div class="controls-panel">
+            <button class="control-btn save-btn" onclick="saveProgress()">💾 Save Progress</button>
+            <button class="control-btn reset-btn" onclick="resetProgress()">🔄 Reset Game</button>
+        </div>
+
+        <!-- Notification -->
+        <div class="notification" id="notification">
+            <div id="notificationText"></div>
+        </div>
+    </div>
+
+    <script>
+        // Game State
+        let gameState = {
+            playerName: 'Hero',
+            level: 1,
+            totalXP: 0,
+            currentLevelXP: 0,
+            powerCrystals: 3,
+            currentStreak: 0,
+            lastSolveDate: null,
+            problemsSolved: [],
+            achievements: [],
+            dailySolveCount: 0,
+            boostActive: false,
+            firstTryCount: 0
+        };
+
+        // Level thresholds
+        const levels = [
+            { level: 1, title: "Apprentice Sorter", xpRequired: 100 },
+            { level: 2, title: "Binary Seeker", xpRequired: 250 },
+            { level: 3, title: "Pointer Master", xpRequired: 450 },
+            { level: 4, title: "Algorithm Knight", xpRequired: 700 },
+            { level: 5, title: "Search Sage", xpRequired: 1000 },
+            { level: 6, title: "Legendary Coder", xpRequired: 9999 }
+        ];
+
+        // Daily Quests
+        const dailyQuests = [
+            "Speed Run - Solve any problem in under 30 minutes",
+            "Explorer - Try a problem from a new stage",
+            "Revisitor - Optimize a previously solved problem",
+            "Helper - Explain your solution to someone",
+            "Researcher - Read editorial after solving",
+            "Wild Card - Your choice of any daily quest"
+        ];
+
+        // Initialize game
+        function initGame() {
+            loadProgress();
+            updateUI();
+            setDailyQuest();
+            checkStreak();
+        }
+
+        // Set daily quest
+        function setDailyQuest() {
+            const today = new Date().getDay();
+            const quest = dailyQuests[today % dailyQuests.length];
+            document.getElementById('dailyQuestTask').textContent = quest;
+        }
+
+        // Toggle problem completion
+        function toggleProblem(problemId, xp, isBoss = false) {
+            const checkbox = event.target;
+            const problemItem = checkbox.closest('.problem-item');
+            const status = document.getElementById(`status${problemId}`);
+            
+            if (checkbox.checked) {
+                // Mark as completed
+                if (!gameState.problemsSolved.includes(problemId)) {
+                    gameState.problemsSolved.push(problemId);
+                    
+                    // Calculate XP
+                    let earnedXP = xp;
+                    if (gameState.boostActive) {
+                        earnedXP *= 2;
+                        gameState.boostActive = false;
+                        showNotification(`⚡ Boost Used! Earned ${earnedXP} XP!`, 'success');
+                    } else {
+                        showNotification(`+${earnedXP} XP earned!`, 'success');
+                    }
+                    
+                    gameState.totalXP += earnedXP;
+                    gameState.currentLevelXP += earnedXP;
+                    gameState.dailySolveCount++;
+                    
+                    // Update status
+                    status.textContent = '✅';
+                    problemItem.classList.add('completed');
+                    
+                    // Check achievements
+                    checkAchievements(isBoss);
+                    
+                    // Update streak
+                    updateStreak();
+                    
+                    // Update UI
+                    updateUI();
+                    saveProgress();
+                }
+            } else {
+                // Unmark (for testing purposes)
+                const index = gameState.problemsSolved.indexOf(problemId);
+                if (index > -1) {
+                    gameState.problemsSolved.splice(index, 1);
+                    status.textContent = '⬜';
+                    problemItem.classList.remove('completed');
+                    updateUI();
+                    saveProgress();
+                }
+            }
+        }
+
+        // Check and unlock achievements
+        function checkAchievements(isBoss = false) {
+            // First Blood
+            if (gameState.problemsSolved.length === 1 && !gameState.achievements.includes('firstBlood')) {
+                unlockAchievement('firstBlood', 'First Blood', 10);
+            }
+            
+            // Boss Slayer
+            if (isBoss && !gameState.achievements.includes('bossSlayer')) {
+                unlockAchievement('bossSlayer', 'Boss Slayer', 30);
+            }
+            
+            // Speed Runner
+            if (gameState.dailySolveCount >= 3 && !gameState.achievements.includes('speedRunner')) {
+                unlockAchievement('speedRunner', 'Speed Runner', 20);
+                gameState.powerCrystals++;
+            }
+            
+            // World Clear (example for 6 problems in World 1)
+            const world1Problems = [1, 2, 3, 4, 5, 6];
+            if (world1Problems.every(id => gameState.problemsSolved.includes(id)) && 
+                !gameState.achievements.includes('worldClear')) {
+                unlockAchievement('worldClear', 'World Conqueror', 50);
+                gameState.powerCrystals++;
+            }
+        }
+
+        // Unlock achievement
+        function unlockAchievement(achId, name, xp) {
+            gameState.achievements.push(achId);
+            gameState.totalXP += xp;
+            gameState.currentLevelXP += xp;
+            
+            const achCard = document.getElementById(`ach${achId.charAt(0).toUpperCase() + achId.slice(1)}`);
+            if (achCard) {
+                achCard.classList.add('unlocked');
+            }
+            
+            showNotification(`🏆 Achievement Unlocked: ${name}! +${xp} XP`, 'achievement');
+            updateUI();
+            saveProgress();
+        }
+
+        // Update streak
+        function updateStreak() {
+            const today = new Date().toDateString();
+            
+            if (gameState.lastSolveDate !== today) {
+                const lastDate = gameState.lastSolveDate ? new Date(gameState.lastSolveDate) : null;
+                const currentDate = new Date();
+                
+                if (lastDate) {
+                    const daysDiff = Math.floor((currentDate - lastDate) / (1000 * 60 * 60 * 24));
+                    
+                    if (daysDiff === 1) {
+                        gameState.currentStreak++;
+                    } else if (daysDiff > 1) {
+                        gameState.currentStreak = 1;
+                    }
+                } else {
+                    gameState.currentStreak = 1;
+                }
+                
+                gameState.lastSolveDate = today;
+                gameState.dailySolveCount = 1;
+                
+                // Check streak achievements
+                if (gameState.currentStreak === 3 && !gameState.achievements.includes('consistent')) {
+                    unlockAchievement('consistent', 'Consistent', 20);
+                }
+            }
+        }
+
+        // Check streak on page load
+        function checkStreak() {
+            if (gameState.lastSolveDate) {
+                const lastDate = new Date(gameState.lastSolveDate);
+                const currentDate = new Date();
+                const daysDiff = Math.floor((currentDate - lastDate) / (1000 * 60 * 60 * 24));
+                
+                if (daysDiff > 1) {
+                    gameState.currentStreak = 0;
+                    gameState.dailySolveCount = 0;
+                }
+            }
+        }
+
+        // Use power crystal
+        function usePowerCrystal(type) {
+            switch(type) {
+                case 'skip':
+                    if (gameState.powerCrystals >= 1) {
+                        gameState.powerCrystals--;
+                        showNotification('🔄 Skip Stone activated! You can skip this problem.', 'success');
+                        updateUI();
+                        saveProgress();
+                    } else {
+                        showNotification('Not enough Power Crystals!', 'error');
+                    }
+                    break;
+                case 'hint':
+                    if (gameState.powerCrystals >= 1) {
+                        gameState.powerCrystals--;
+                        showNotification('💡 Hint: Think about sorting first, then use two pointers!', 'success');
+                        updateUI();
+                        saveProgress();
+                    } else {
+                        showNotification('Not enough Power Crystals!', 'error');
+                    }
+                    break;
+                case 'boost':
+                    if (gameState.powerCrystals >= 2) {
+                        gameState.powerCrystals -= 2;
+                        gameState.boostActive = true;
+                        showNotification('⚡ Energy Boost activated! Next problem gives 2x XP!', 'success');
+                        updateUI();
+                        saveProgress();
+                    } else {
+                        showNotification('Not enough Power Crystals!', 'error');
+                    }
+                    break;
+            }
+        }
+
+        // Update UI
+        function updateUI() {
+            // Update stats
+            document.getElementById('playerName').textContent = gameState.playerName;
+            document.getElementById('playerLevel').textContent = gameState.level;
+            document.getElementById('totalXP').textContent = gameState.totalXP;
+            document.getElementById('currentStreak').textContent = gameState.currentStreak;
+            
+            // Update level and title
+            let currentLevelData = levels[gameState.level - 1];
+            let nextLevelXP = currentLevelData.xpRequired;
+            
+            // Check for level up
+            if (gameState.totalXP >= nextLevelXP && gameState.level < 6) {
+                gameState.level++;
+                currentLevelData = levels[gameState.level - 1];
+                showNotification(`🎉 LEVEL UP! You are now Level ${gameState.level}: ${currentLevelData.title}!`, 'achievement');
+                
+                // Award power crystal on level up
+                if (gameState.level % 2 === 0) {
+                    gameState.powerCrystals++;
+                    showNotification('+1 Power Crystal awarded!', 'success');
+                }
+            }
+            
+            document.getElementById('playerTitle').textContent = currentLevelData.title;
+            
+            // Update XP bar
+            const prevLevelXP = gameState.level > 1 ? levels[gameState.level - 2].xpRequired : 0;
+            const xpForCurrentLevel = nextLevelXP - prevLevelXP;
+            const xpProgress = gameState.totalXP - prevLevelXP;
+            const xpPercentage = Math.min(100, (xpProgress / xpForCurrentLevel) * 100);
+            
+            document.getElementById('xpProgress').textContent = `${xpProgress}/${xpForCurrentLevel} XP`;
+            document.getElementById('xpBar').style.width = xpPercentage + '%';
+            document.getElementById('xpPercentage').textContent = Math.round(xpPercentage) + '%';
+            
+            // Update power crystals
+            for (let i = 1; i <= 3; i++) {
+                const crystal = document.getElementById(`crystal${i}`);
+                if (crystal) {
+                    crystal.style.opacity = i <= gameState.powerCrystals ? '1' : '0.3';
+                }
+            }
+            
+            // Update world progress
+            const world1Solved = gameState.problemsSolved.filter(id => id <= 8).length;
+            document.getElementById('world1Progress').textContent = `${world1Solved}/8`;
+            document.getElementById('world1Percentage').textContent = Math.round((world1Solved / 8) * 100) + '%';
+            
+            // Restore checkboxes and statuses
+            gameState.problemsSolved.forEach(problemId => {
+                const checkbox = document.querySelector(`[data-problem-id="${problemId}"] .problem-checkbox`);
+                const status = document.getElementById(`status${problemId}`);
+                const problemItem = document.querySelector(`[data-problem-id="${problemId}"]`);
+                
+                if (checkbox) {
+                    checkbox.checked = true;
+                }
+                if (status) {
+                    status.textContent = '✅';
+                }
+                if (problemItem) {
+                    problemItem.classList.add('completed');
+                }
+            });
+            
+            // Update achievements
+            gameState.achievements.forEach(achId => {
+                const achCard = document.getElementById(`ach${achId.charAt(0).toUpperCase() + achId.slice(1)}`);
+                if (achCard) {
+                    achCard.classList.add('unlocked');
+                }
+            });
+        }
+
+        // Show notification
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notificationText');
+            
+            notificationText.textContent = message;
+            notification.className = `notification show ${type}`;
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Save progress
+        function saveProgress() {
+            localStorage.setItem('codeforcesQuestState', JSON.stringify(gameState));
+            showNotification('Progress saved!', 'success');
+        }
+
+        // Load progress
+        function loadProgress() {
+            const saved = localStorage.getItem('codeforcesQuestState');
+            if (saved) {
+                gameState = JSON.parse(saved);
+                showNotification('Progress loaded!', 'success');
+            }
+        }
+
+        // Reset progress
+        function resetProgress() {
+            if (confirm('Are you sure you want to reset all progress? This cannot be undone!')) {
+                localStorage.removeItem('codeforcesQuestState');
+                location.reload();
+            }
+        }
+
+        // Initialize on load
+        window.onload = initGame;
+
+        // Auto-save every 30 seconds
+        setInterval(() => {
+            if (gameState.problemsSolved.length > 0) {
+                localStorage.setItem('codeforcesQuestState', JSON.stringify(gameState));
+            }
+        }, 30000);
+
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 's') {
+                e.preventDefault();
+                saveProgress();
+            }
+        });
+    </script>
+</body>
+</html>
+<!-- ``` -->
+
+<!-- ## How to Use This Website:
+
+### **Setup:**
+1. Copy the entire code above
+2. Save it as `codeforces-quest.html` on your computer
+3. Open the file in any modern web browser (Chrome, Firefox, Edge, Safari)
+
+### **Features:**
+
+#### **📊 Progress Tracking:**
+- Automatically saves your progress to browser storage
+- Tracks XP, levels, streaks, and achievements
+- Shows completion percentage for each world
+- Visual indicators for completed problems
+
+#### **🎮 Interactive Elements:**
+- Click checkboxes to mark problems as solved
+- Earn XP immediately upon completion
+- Level up with animations and notifications
+- Unlock achievements with special effects
+
+#### **💎 Power Crystal System:**
+- Use crystals for hints, skips, or XP boosts
+- Earn more crystals through achievements and level-ups
+- Strategic resource management adds gameplay depth
+
+#### **🏆 Achievement System:**
+- 6+ achievements to unlock
+- Visual badges when unlocked
+- Bonus XP and crystal rewards
+
+#### **📱 Responsive Design:**
+- Works on desktop, tablet, and mobile
+- Adjusts layout for smaller screens
+- Touch-friendly interface
+
+#### **🔥 Streak Tracking:**
+- Maintains daily solving streaks
+- Animated flame icon for active streaks
+- Streak-based achievements
+
+#### **💾 Save System:**
+- Auto-saves every 30 seconds
+- Manual save button
+- Progress persists between sessions
+- Reset option for starting fresh
+
+### **Game Mechanics:**
+
+1. **Start Small:** Begin with World 1 easy problems
+2. **Build Streaks:** Solve at least one problem daily
+3. **Earn XP:** Different difficulties give different XP
+4. **Level Up:** Reach XP thresholds to advance
+5. **Unlock Achievements:** Complete special challenges
+6. **Use Power Crystals:** Strategic advantages when stuck
+
+The website makes practicing algorithms fun and engaging while maintaining the educational value. Your progress is stored locally in your browser, so you can close and reopen it anytime without losing data! -->
